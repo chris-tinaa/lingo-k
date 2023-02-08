@@ -1,0 +1,51 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Configuration files
+.env
+
+# Build files
+dist/
+build/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and editors
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# npm stuff
+.npmrc
+package-lock.json
+npm-shrinkwrap.json
+yarn.lock
+
+# Miscellaneous
+.nyc_output/
+.vscode/
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Secure files
+*.key
+*.pem
+*.cert
+creds.json
+.clasprc.json
