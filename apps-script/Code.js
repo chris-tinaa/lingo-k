@@ -12,7 +12,7 @@ function doGet(e) {
   const whatsapp = e.parameter.whatsapp;
   const user_data = getDataByWhatsapp(whatsapp, user);
 
-  if (action == 'start-registration') {
+  if (action == 'start-subscription') {
     const id = generateNewId(user);
     const name = e.parameter.name;
     let isSuccess, data, message;
@@ -135,6 +135,26 @@ function doGet(e) {
       success: isSuccess,
       message: message
     }
+  } else if (action == 'get-user-detail') {
+
+    let isSuccess, data, message;
+
+    if (user_data != null) {
+      data = user_data;
+      message = 'Success to get user data!';
+      isSuccess = true;
+    } else {
+      data = null;
+      message = 'Failed. User isn\'t signed up.'
+      isSuccess = false;
+    }
+
+    response = {
+      success: isSuccess,
+      data: data,
+      message: message
+    }
+
   }
 
   return ContentService.createTextOutput(JSON.stringify(response)).setMimeType(ContentService.MimeType.JSON);
