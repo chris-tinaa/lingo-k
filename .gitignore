@@ -49,3 +49,4 @@ yarn.lock
 *.cert
 creds.json
 .clasprc.json
+auth.json
