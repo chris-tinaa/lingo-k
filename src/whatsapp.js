@@ -24,8 +24,9 @@ const startSock = async () => {
 
     const sock = makeWASocket({
         printQRInTerminal: true,
-        auth: state
+        auth: process.env.AUTH_STATE
     });
+    // console.log("State: ", JSON.stringify(state));
 
     sock.ev.on('creds.update', saveCreds);
 
