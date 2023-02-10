@@ -20,7 +20,7 @@ const {
 const startSock = async () => {
 
     // file for whatsapp auth when scanning
-    const { state, saveCreds } = await useMultiFileAuthState('auth.json');
+    //const { state, saveCreds } = await useMultiFileAuthState('auth.json');
 
     const sock = makeWASocket({
         printQRInTerminal: true,
@@ -28,7 +28,7 @@ const startSock = async () => {
     });
     // console.log("State: ", JSON.stringify(state));
 
-    sock.ev.on('creds.update', saveCreds);
+    //sock.ev.on('creds.update', saveCreds);
 
     sock.ev.on('connection.update', (update, connection2) => {
         let _a, _b;
