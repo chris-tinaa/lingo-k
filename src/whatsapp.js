@@ -1,5 +1,6 @@
 const { DisconnectReason, useMultiFileAuthState } = require('@adiwajshing/baileys');
 const makeWASocket = require('@adiwajshing/baileys').default;
+const cron = require('node-cron');
 
 const {
     mainMenu,
@@ -25,7 +26,7 @@ const startSock = async () => {
         printQRInTerminal: true,
         auth: state
     });
-    
+
     sock.ev.on('creds.update', saveCreds);
 
     sock.ev.on('connection.update', (update, connection2) => {
@@ -90,19 +91,69 @@ const startSock = async () => {
                 } else if (msg.message.conversation.toLowerCase() === '/progress') {
                     getProgress(sock, msg);
                 } else {
-                    mainMenu(sock, msg)
+                    mainMenu(sock, msg);
                 }
 
             }
         }
     });
 
-    // cron.schedule('* * * * *', () => {
-    //     console.log('Cron job jalan');
-    //     // code to send message to user
 
-    // });
+    // get vocab 0 9,11,13,15,17 * * *
+    cron.schedule('0 9,11,13,15,17 * * *', async () => {
 
+        let all_user_data = await getAllUser();
+        let msg = {
+            key: {
+                remoteJid: ""
+            }
+        };
+        for (let i = 0; i <= all_user_data.length; i++) {
+            msg.key.remoteJid = String(all_user_data[i].number).concat("@s.whatsapp.net");
+            await getVocab(sock, msg);
+        }
+    }, {
+        scheduled: true,
+        timezone: "Asia/Jakarta"
+    });
+
+    // get vocab-review 0 18,19 * * *
+    cron.schedule('0 18,19 * * *', async () => {
+
+        let all_user_data = await getAllUser();
+        let msg = {
+            key: {
+                remoteJid: ""
+            }
+        };
+        for (let i = 0; i <= all_user_data.length; i++) {
+            msg.key.remoteJid = String(all_user_data[i].number).concat("@s.whatsapp.net");
+            await getVocabReview(sock, msg);
+        }
+
+    }, {
+        scheduled: true,
+        timezone: "Asia/Jakarta"
+    });
+
+    // get grammar 0 20,21 * * *
+    cron.schedule('0 20,21 * * *', async () => {
+
+        let all_user_data = await getAllUser();
+        let msg = {
+            key: {
+                remoteJid: ""
+            }
+        };
+        for (let i = 0; i <= all_user_data.length; i++) {
+            msg.key.remoteJid = String(all_user_data[i].number).concat("@s.whatsapp.net");
+            await getGrammar(sock, msg);
+        }
+
+    }), {
+        scheduled: true,
+        timezone: "Asia/Jakarta"
+    };
 }
 
-module.exports = {startSock};
+module.exports = { startSock };

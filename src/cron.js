@@ -1,11 +1,37 @@
-const cron = require('node-cron');
+// const cron = require('node-cron');
+// const {
+//   mainMenu,
+//   getCommands,
+//   getVocab,
+//   getVocabReview,
+//   getGrammar,
+//   getGrammarReview,
+//   getProgress,
+//   stopSubscription,
+//   translate,
+//   addNewUser,
+//   getAllUser
+// } = require('./api');
 
-const startCronJob = () => {
-  cron.schedule('* * * * * *', () => {
-    console.log('running a task every minute');
-  });
-}
 
-module.exports = {
-  startCronJob,
-};
+// const startSock = async () => {
+
+//   // file for whatsapp auth when scanning
+//   const { state, saveCreds } = await useMultiFileAuthState('auth.json');
+
+//   const sock = makeWASocket({
+//     printQRInTerminal: true,
+//     auth: state
+//   });
+
+//   const startCronJob = () => {
+//     cron.schedule('* * * * * *', () => {
+//       console.log('I need sock here');
+//     });
+//   }
+
+// }
+
+//   module.exports = {
+//     startCronJob
+//   };

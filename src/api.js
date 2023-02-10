@@ -17,8 +17,8 @@ const COMMANDS = [
 ];
 async function mainMenu(sock, msg) {
 
-    axios.get(`${BASE_URL}action=get-user-detail&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
-        then((response) => {
+    return axios.get(`${BASE_URL}action=get-user-detail&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
+        then(async (response) => {
             console.log("Progress resp: " + JSON.stringify(response.data));
             let { success, data, message } = response.data;
             if (success) {
@@ -27,7 +27,7 @@ async function mainMenu(sock, msg) {
 
             } else {
 
-                sock.sendMessage(msg.key.remoteJid, { text: `안녕하세요!\n\n Hola, nice to meet you.\n\n_Just answer */start* if you want to use me! Or */info* for further detail_` });
+                await sock.sendMessage(msg.key.remoteJid, { text: `안녕하세요!\n\n Hola, nice to meet you.\n\n_Just answer */start* if you want to use me! Or */info* for further detail_` });
 
                 const templateButtons = [
                     { index: 1, quickReplyButton: { displayText: 'Start!😆', id: "start-subscription" } },
@@ -40,7 +40,7 @@ async function mainMenu(sock, msg) {
                     templateButtons: templateButtons
                 }
 
-                sock.sendMessage(msg.key.remoteJid, templateMessage)
+                await sock.sendMessage(msg.key.remoteJid, templateMessage);
 
             }
         }).catch(function (error) {
@@ -59,7 +59,7 @@ async function getCommands(sock, msg) {
 }
 
 async function getVocab(sock, msg) {
-    axios.get(`${BASE_URL}action=get-vocab&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
+    return axios.get(`${BASE_URL}action=get-vocab&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
         then((response) => {
             console.log("Get vocab resp: " + JSON.stringify(response.data));
             let { success, data, message } = response.data;
@@ -81,7 +81,7 @@ async function getVocab(sock, msg) {
 }
 
 async function getVocabReview(sock, msg) {
-    axios.get(`${BASE_URL}action=get-vocab-review&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
+    return axios.get(`${BASE_URL}action=get-vocab-review&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
         then((response) => {
             console.log("Get vocab resp: " + JSON.stringify(response.data));
             let { success, data, message } = response.data;
@@ -112,7 +112,7 @@ async function getVocabReview(sock, msg) {
 }
 
 async function getGrammar(sock, msg) {
-    axios.get(`${BASE_URL}action=get-grammar&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
+    return axios.get(`${BASE_URL}action=get-grammar&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
         then((response) => {
             console.log("Get grammar resp: " + JSON.stringify(response.data));
             let { success, data, message } = response.data;
@@ -148,7 +148,7 @@ async function getGrammar(sock, msg) {
 }
 
 async function getGrammarReview(sock, msg) {
-    axios.get(`${BASE_URL}action=get-grammar-review&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
+    return axios.get(`${BASE_URL}action=get-grammar-review&whatsapp=${msg.key.remoteJid.replace("@s.whatsapp.net", "")}`).
         then((response) => {
             console.log("Get vocab resp: " + JSON.stringify(response.data));
             let { success, data, message } = response.data;
@@ -284,10 +284,10 @@ function addNewUser(sock, msg) {
         });;
 }
 
-function getAllUser(sock) {
-    return axios.get(`${BASE_URL}action=get-all-user}`).
+function getAllUser() {
+    return axios.get(`${BASE_URL}action=get-all-user`).
         then((response) => {
-            console.log("Resp: " + JSON.stringify(response.data));
+            console.log("All User Data: " + JSON.stringify(response.data));
             let { success, data, message } = response.data;
 
             if (success) {
