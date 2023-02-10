@@ -24,7 +24,7 @@ const startSock = async () => {
 
     const sock = makeWASocket({
         printQRInTerminal: true,
-        auth: process.env.AUTH_STATE
+        auth: JSON.parse(process.env.AUTH_STATE)
     });
     // console.log("State: ", JSON.stringify(state));
 
