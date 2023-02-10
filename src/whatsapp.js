@@ -21,7 +21,7 @@ const {
 const startSock = async () => {
 
     // file for whatsapp auth when scanning
-    const { state, saveCreds } = await useMultiFileAuthState('auth.json');
+    const { state, saveCreds } = await useMultiFileAuthState('./auth.json');
 
     const sock = makeWASocket({
         printQRInTerminal: true,
