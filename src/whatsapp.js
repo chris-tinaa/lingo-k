@@ -58,7 +58,7 @@ const startSock = async () => {
         // LOGIC untuk BOT WhatsApp
         const msg = m.messages[0];
         console.log("There's a message: " + JSON.stringify(msg));
-
+        
         if (!msg.key.fromMe && m.type === 'notify') {
             if (msg.key.remoteJid.includes('@s.whatsapp.net')) {
 
