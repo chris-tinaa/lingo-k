@@ -243,7 +243,7 @@ function translate(sock, msg, source_language, target_language) {
         url: TRANSLATOR_URL,
         headers: {
             'content-type': 'application/x-www-form-urlencoded',
-            'X-RapidAPI-Key': 'd7233a1200msh876cb9bc7677956p100679jsndf50e3a59333',
+            'X-RapidAPI-Key': process.env.RAPID_API_KEY,
             'X-RapidAPI-Host': 'text-translator2.p.rapidapi.com'
         },
         data: encodedParams
